@@ -1,0 +1,362 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+<br>
+<br>
+
+# Practice problems
+
+These are practice problems for Week 9
+
+- [Translations and proofs with identity and equivalence relations](#translations-and-proofs-with-identity-and-equivalence relations)
+- [Proof or refutation with identity](#proof-or-refutation-with-identity)
+- [Proof or refutation with exact numerical quantifiers](#proof-or-refutation-with-exact-numerical-quantifiers)
+- [Refutations with functions and orders](#refutations-with-functions-and-orders)
+
+<p style="page-break-before: always">
+
+<br>
+
+## Translations and proofs with identity and equivalence relations
+
+
+<br>
+
+*Problem 1*
+
+<p style="margin-left: 40px"> $a$ = Alex </p>
+<p style="margin-left: 40px"> $Hx$ = $x$ helps  </p>
+<p style="margin-left: 40px"> $Rxy$ = $x$ respects $y$  </p>
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+09.01 Ax(~x=a->Hx)->AxAy(~y=a->Rxy) : If everyone except Alex helps, then everyone respects everyone except Alex.
+|
+~~~
+
+<br>
+
+*Problem 2*
+
+<p style="margin-left: 40px"> $a$ = Alex </p>
+<p style="margin-left: 40px"> $b$ = Brianna </p>
+<p style="margin-left: 40px"> $c$ = Carlos </p>
+<p style="margin-left: 40px"> $Rxy$ = $x$ respects $y$  </p>
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+09.02 Rba->Ex(~x=c/\Rxa) : If Brianna respects Alex, then someone besides Carlos respects Alex.
+|
+~~~
+
+<br>
+
+*Problem 3*
+
+This one involves the elimination rule for identity plus a little disjunction elimination.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.03 Fa, Gb, Ax(x=a\/x=b)  :|-: Ax(Fx\/Gx)
+|Fa :assumption
+|Gb :assumption
+|Ax(x=a\/x=b) :assumption
+```
+
+<br>
+
+*Problem 4*
+
+This one involves the introduction rule for identity together with a little distribution `LDC`.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.04 AxAy(x=y->(Fx\/Gy))  :|-: AxAy(((Fx\/Gx)/\Fy)\/((Fx\/Gx)/\Gy))
+|AxAy(x=y->(Fx\/Gy)) :assumption
+```
+
+
+<br>
+
+
+*Problem 5*.
+
+Consider an equivalence relation $R$. Suppose that `~Rab`. This problem asks one to show that `~Ey(Ray/\Rby)`.
+
+One way to do this is as follows: introduce the negation at the end, and hence go from `Ey(Ray/\Rby)` to falsum inside a bracket. To get rid of the existential, you'll have to do existential elimination, and hence go from `Rac/\Rbc` to falsum inside a second bracket.
+
+Another way to do this is follows: first prove `Ax(Ray->~Rby)`, and then use double-negation and DeMorgan and the principle relating conditionals to negation (`NC`) to go from this to `Ey(Ray/\Rby)`.
+
+In each of these proofs strategies, one ends up applying symmetry and transitivity to go from `Rac` and `Rbc` to `Rac` and `Rcb` (via symmetry), and then to `Rab` (via transitivity).
+
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.05 AxRxx, AxAy(Rxy->Ryx), AxAyAz((Rxy/\Ryz)->Rxz), ~Rab :|-: ~Ey(Ray/\Rby)
+|AxRxx :assumption
+|AxAy(Rxy->Ryx) :assumption
+|AxAyAz((Rxy/\Ryz)->Rxz) :assumption
+|~Rab :assumption
+```
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.05 AxRxx, AxAy(Rxy->Ryx), AxAyAz((Rxy/\Ryz)->Rxz), ~Rab :|-: ~Ey(Ray/\Rby)
+|AxRxx :assumption
+|AxAy(Rxy->Ryx) :assumption
+|AxAyAz((Rxy/\Ryz)->Rxz) :assumption
+|~Rab :assumption
+```
+
+<br>
+
+## Proof or refutation with identity
+
+<br>
+
+*Problem 6*
+
+For this problem, either prove or refute the following. Before beginning, try to draw an Euler diagram of the premises, with the predicates as figures (squares, circles, etc.) and with the constants as points.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.06 Ax((x=a\/x=b)\/(x=c\/x=d)), (Fa/\Fb)/\(Fc/\~Fd), (~Ga/\Gb)/\(Gc/\Gd) :|-: ~b=d
+|Ax((x=a\/x=b)\/(x=c\/x=d)) :assumption
+|(Fa/\Fb)/\(Fc/\~Fd) :assumption
+|(~Ga/\Gb)/\(Gc/\Gd) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.06 Ax((x=a\/x=b)\/(x=c\/x=d)), (Fa/\Fb)/\(Fc/\~Fd), (~Ga/\Gb)/\(Gc/\Gd) :|-: ~b=d
+```
+
+<br>
+
+
+*Problem 7*
+
+For this problem, either prove or refute the following. Before beginning, try to draw an Euler diagram of the premises, with the predicates as figures (squares, circles, etc.) and with the constants as points.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.07 Ax((x=a\/x=b)\/(x=c\/x=d)), (Fa/\Fb)/\(Fc/\~Fd), (~Ga/\Gb)/\(Gc/\Gd) :|-: ~b=c
+|Ax((x=a\/x=b)\/(x=c\/x=d)) :assumption
+|(Fa/\Fb)/\(Fc/\~Fd) :assumption
+|(~Ga/\Gb)/\(Gc/\Gd) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.07 Ax((x=a\/x=b)\/(x=c\/x=d)), (Fa/\Fb)/\(Fc/\~Fd), (~Ga/\Gb)/\(Gc/\Gd) :|-: ~b=c
+```
+
+<br>
+
+
+*Problem 8*
+
+For this problem, either prove or refute the following. Before beginning, try to draw an Euler diagram of the premises, with the constants as points and with the binary relation drawn with an arrow.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.08 AyRyy, Ay(Rby->Ray), Ay(y=c->Rby) :|-: AuAv((Rbu/\Rbv)->u=v)
+|AyRyy :assumption
+|Ay(Rby->Ray) :assumption
+|Ay(y=c->Rby) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.08 AyRyy, Ay(Rby->Ray), Ay(y=c->Rby) :|-: AuAv((Rbu/\Rbv)->u=v)
+```
+
+<br>
+
+
+*Problem 9*
+
+For this problem, either prove or refute the following. Before beginning, try to draw an Euler diagram of the premises, with the constants as points and with the binary relation drawn with an arrow.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.09 AyRyy, Ay(Ray->Rby), Ay(Rby->y=c) :|-: a=c
+|AyRyy :assumption
+|Ay(Ray->Rby) :assumption
+|Ay(Rby->y=c) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.09 AyRyy, Ay(Ray->Rby), Ay(Rby->y=c) :|-: a=c
+```
+
+<br>
+
+
+
+*Problem 10*
+
+For this problem, either prove or refute the following. Before beginning, try to draw an Euler diagram of the premises, with the predicates as figures (squares, circles, etc.) and with the constants as points.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.10 Ax(Fx->Ey(Fy/\~x=y)), Ax(Gx->Ey(Gy/\~x=y)), ~Ez(Fz/\Gz), Fa, Gb  :|-: Au(u=a\/u=b)
+|Ax(Fx->Ey(Fy/\~x=y)) :assumption
+|Ax(Gx->Ey(Gy/\~x=y)) :assumption
+|~Ez(Fz/\Gz) :assumption
+|Fa :assumption
+|Gb :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.10 Ax(Fx->Ey(Fy/\~x=y)), Ax(Gx->Ey(Gy/\~x=y)), ~Ez(Fz/\Gz), Fa, Gb  :|-: Au(u=a\/u=b)
+```
+
+<br>
+
+## Proof or refutation with exact numerical quantifiers
+
+<br>
+
+For these five problems, consider reviewing [the exact numerical quantifiers](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-expressibility-solutions.pandoc#exact-numerical-quantifiers) before beginning. In particular, prior to trying each problem, pronounce the premises and conclusion out loud using the locutions "at least . . ." and "at most . . ." and "exactly" featured in the [the exact numerical quantifiers](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-expressibility-solutions.pandoc#exact-numerical-quantifiers).
+
+<br>
+
+*Problem 11*
+
+For this problem, either prove or refute the following.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.11 Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)) :|-: Ex_1Ex_2((Fx_1/\Fx_2)/\~x_1=x_2)
+|Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.11 Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)) :|-: Ex_1Ex_2((Fx_1/\Fx_2)/\~x_1=x_2)
+```
+
+<br>
+
+
+*Problem 12*
+
+For this problem, either prove or refute the following.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.12 Ex_1Ex_2((Fx_1/\Fx_2)/\~x_1=x_2) :|-: Ex_1 Fx_1
+|Ex_1Ex_2((Fx_1/\Fx_2)/\~x_1=x_2) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.12 Ex_1Ex_2((Fx_1/\Fx_2)/\~x_1=x_2) :|-: Ex_1 Fx_1
+```
+
+<br>
+
+*Problem 13*
+
+For this problem, either prove or refute the following.
+
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.13 Ex_1Ex_2(((Fx_1\/Gx_1)/\(Fx_2\/Gx_2))/\~x_1=x_2) :|-: Ex_1Ex_2(((Fx_1/\Gx_1)/\(Fx_2/\Gx_2))/\~x_1=x_2)
+|Ex_1Ex_2(((Fx_1\/Gx_1)/\(Fx_2\/Gx_2))/\~x_1=x_2) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.13 Ex_1Ex_2(((Fx_1\/Gx_1)/\(Fx_2\/Gx_2))/\~x_1=x_2) :|-: Ex_1Ex_2(((Fx_1/\Gx_1)/\(Fx_2/\Gx_2))/\~x_1=x_2)
+```
+
+<br>
+
+<br>
+
+*Problem 14*
+
+For this problem, either prove or refute the following.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.14 Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)), Ax(Fx->Gx) :|-: Ex_1Ex_2Ay(Gy->(y=x_1\/y=x_2))
+|Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)) :assumption
+|Ax(Fx->Gx) :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.14 Ex_1Ex_2Ay(Fy->(y=x_1\/y=x_2)), Ax(Fx->Gx) :|-: Ex_1Ex_2Ay(Gy->(y=x_1\/y=x_2))
+```
+
+<br>
+
+
+*Problem 15*
+
+For this problem, either prove or refute the following.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+09.15 Ex_1Ex_2(((Fx_1/\Fx_2)/\~x_1=x_2)/\Ay(Fy->(y=x_1\/y=x_2))), Fa/\Ga, Fb/\~Gb :|-: Ax(Fx->(x=a\/x=b))
+|Ex_1Ex_2(((Fx_1/\Fx_2)/\~x_1=x_2)/\Ay(Fy->(y=x_1\/y=x_2))) :assumption
+|Fa/\Ga :assumption
+|Fb/\~Gb :assumption
+```
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.15 Ex_1Ex_2(((Fx_1/\Fx_2)/\~x_1=x_2)/\Ay(Fy->(y=x_1\/y=x_2))), Fa/\Ga, Fb/\~Gb :|-: Ax(Fx->(x=a\/x=b))
+```
+
+<br>
+
+## Refutations with functions and orders
+
+<br>
+
+These are just refutation problems: you find a model where the premises are true and the conclusion is false. Prior to trying these problems, review the sections on [functions](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-expressibility-solutions.pandoc#functions) and [orders](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-expressibility-solutions.pandoc#orders). In particular, prior to trying each problem, pronounce the premises and conclusion out loud using concepts of functionality, injectivity, surjectivity, reflexivity, anti-reflexivity, symmetry, anti-symmetry, etc.
+
+
+<br>
+
+*Problem 16*
+
+Note that `AxRxx` is reflexivity, but when the binary relation is functional, this is saying that it is the graph of a function $f$ such that $f(x)=x$ for all values of $x$. That is, when the binary relation is functional, `AxRxx` is saying that the function is the identity function.
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.16 AxEy(Rxy/\Az(Rxz->y=z)), AxAyAz((Rxz/\Ryz)->x=y), ~a=b, ~b=c, ~a=c :|-: AxRxx
+```
+
+<br>
+
+*Problem 17*
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.17 AxEy(Rxy/\Az(Rxz->y=z)), AxAyAz((Rxz/\Ryz)->x=y), ~a=b, ~b=c, ~a=c, ~ExEyEz((Rxy/\Ryz)/\Rzx) :|-: ExRxx
+```
+
+<br>
+
+*Problem 18*
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.18 ~AxRxx, AxAyAz((Rxy/\Ryz)->Rxz), Rab, Rbc :|-: AxAyAz((Rxy\/Ryx)\/x=y)
+```
+
+<br>
+
+
+
+*Problem 19*
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.19  ~AxRxx, AxAyAz((Rxy/\Ryz)->Rxz), AxAyAz((Rxy\/Ryx)\/x=y), Rab, Rbc, Rcd :|-: ExAy(x=y\/Rxy)->~EyAx(x=y\/Rxy)
+```
+
+<br>
+
+*Problem 20*
+
+```{.CounterModeler .Validity system="gamutND" submission="none"}
+09.20  AxRxx, AxAy((Rxy/\Ryx)->x=y), AxAyAz((Rxy/\Ryz)->Rxz), AxAyAz(Rxy\/Ryx), Rab/\~a=b, Rbc/\~b=c, Rcd/\~c=d :|-: ExAyRxy->~EyAxRxy
+```
+
+<br>
+
+These are practice problems written by Sean Walsh. They are run on [carnap.io](http://www.carnap.io).[^5]
+
+[^5]: which is:
+
+<br>

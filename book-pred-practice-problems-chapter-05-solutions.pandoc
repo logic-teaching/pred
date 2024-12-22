@@ -1,0 +1,294 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+<br>
+<br>
+
+# Practice problems *with solutions*
+
+These are practice problems for Week 5.
+
+- [Equivalences in propositional logic](#equivalences-in-propositiona-logic)
+- [Equivalences using DeMorgan](#equivalences-using-demorgan)
+- [Equivalences and the Aristotelian propositions](#equivalences-and-the-aristotelian-propositions)
+- [Prenex normal form](#prenex-normal-form)
+
+<p style="page-break-before: always">
+
+This version has **the solutions** in it. They are just filled in. Keep in mind that there can, in most cases, be several correct solutions to a given problem.
+
+<br>
+
+## Equivalences in propositional logic
+
+<br>
+
+On these problems, please review [the tautologies and equivalences from propositional logic](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-tautologies.pandoc#tautologies-and-equivalences-from-propositional-logic) before beginning.
+
+<br>
+
+*Example 1*. Use propositional DeMorgan and the propositional equivalences to find an equivalent of the following which contains no disjunctions and only one negation:
+
+$\neg (p\vee \neg q)$.
+
+~~~{.Translate .Prop system="gamutPND" tests="maxNeg:1 maxOr:0" submission="none"}
+4.01 ~p/\q :
+|~p/\q
+~~~
+
+<br>
+
+*Example 2*. Use propositional DeMorgan and the propositional equivalences to find an equivalent of the following which contains no conjunctions:
+
+$\neg (p\wedge (q\wedge r))$.
+
+~~~{.Translate .Prop system="gamutPND" tests="maxAnd:0" submission="none"}
+4.02 ~p\/(~q\/~r) :
+|~p\/(~q\/~r)
+~~~
+
+<br>
+
+*Example 3*. Use propositional equivalences to write an equivalent of the following which contains no conditionals:
+
+$p\rightarrow (q\rightarrow r)$.
+
+~~~{.Translate .Prop system="gamutPND" tests="maxIf:0" submission="none"}
+4.03 ~p\/(~q\/r) :
+|~p\/(~q\/r)
+~~~
+
+<br>
+
+*Example 4*. Use propositional DeMorgan and propositional equivalences to write an equivalent of the following which contains no conditionals and only one disjunction:
+
+$(p\rightarrow q)\rightarrow r$.
+
+~~~{.Translate .Prop system="gamutPND" tests="maxIf:0 maxOr:1" submission="none"}
+4.04 (~p/\~q)\/r :
+|(~p/\~q)\/r
+~~~
+
+<br>
+
+*Example 5*. Use propositional DeMorgan and propositional equivalences to write an equivalent of the following which contains no conditionals and only one conjunction and only two disjunctions:
+
+$\neg (p\rightarrow q)\rightarrow \neg (q\rightarrow p)$.
+
+~~~{.Translate .Prop system="gamutPND" tests="maxIf:0 maxAnd:1 maxOr:2" submission="none"}
+4.05 (~p\/q)\/(q/\~p) :
+|(~p\/q)\/(q/\~p)
+~~~
+
+
+<p style="page-break-before: always">
+
+<br>
+
+## Equivalences using DeMorgan
+
+<br>
+
+On these problems, please reivew [DeMorgan for the quantifiers](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-tautologies.pandoc#demorgan-for-the-quantifiers) before beginning.
+
+<br>
+
+*Example 6*. Use DeMorgan to find an equivalent of the following:
+
+$\neg \forall \; x \; \exists \; y \; Rxy$.
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.06 ExAy~Rxy :
+|ExAy~Rxy
+~~~
+
+<br>
+
+*Example 7*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no negations:
+
+$\neg \forall \; x \; \exists \; y \; \neg Rxy$
+
+~~~{.Translate .FOL system="gamutND" tests="maxNeg:0" submission="none"}
+4.07 ExAyRxy :
+|ExAyRxy
+~~~
+
+<br>
+
+*Example 8*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no negations:
+
+$\neg \forall \; x \; \neg \exists \; y \; Rxy$
+
+~~~{.Translate .FOL system="gamutND" tests="maxNeg:0 PNF" submission="none"}
+4.08 ExEyRxy :
+|ExEyRxy
+~~~
+
+<br>
+
+*Example 9*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no conjunctions:
+
+$\neg \forall \; x \; \exists \; y \; \forall \; z \; (Rxy\wedge Ryz)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxAnd:0 PNF" submission="none"}
+4.09 ExAyEz(~Rxy\/~Ryz) :
+|ExAyEz(~Rxy\/~Ryz)
+~~~
+
+<br>
+
+
+*Example 10*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no conjunctions and no conditionals:
+
+$\forall \; x \; \exists \; y \; \forall \; z \; (Rxy\wedge Ryz) \rightarrow \neg \forall \; x \; \forall \; y \; (Rxy\wedge Rxx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxAnd:0 maxIf:0" submission="none"}
+4.10 ExAyEz(~Rxy\/~Ryz)\/ExEy(~Rxy\/~Rxx) :
+|ExAyEz(~Rxy\/~Ryz)\/ExEy(~Rxy\/~Rxx)
+~~~
+
+<br>
+
+## Equivalences and the Aristotelian propositions
+
+<br>
+
+These problems essentially just combine the skills from the two previous sections to the propositions which feature in the Aristotelian syllogisms.
+
+<br>
+
+*Example 11*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no conjunctions and no negations:
+
+$\neg \exists \; x \; (Fx\wedge \neg Gx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxAnd:0 maxNeg:0" submission="none"}
+4.11 Ax(Fx->Gx) :
+|Ax(Fx->Gx)
+~~~
+
+<br>
+
+*Example 12*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no negations:
+
+$\neg \forall \; x \; (\neg Fx\vee \neg Gx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxNeg:0" submission="none"}
+4.12 Ex(Fx/\Gx) :
+|Ex(Fx/\Gx)
+~~~
+
+<br>
+
+*Example 13*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no conjunctions and no disjunctions:
+
+$\exists \; x \; (Hx \wedge \neg Gx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxAnd:0 maxOr:0" submission="none"}
+4.13 ~Ax(Hx->Gx) :
+|~Ax(Hx->Gx)
+~~~
+
+<br>
+
+*Example 14*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no negations:
+
+$\neg \exists \; x \; (Hx \rightarrow \neg Gx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxNeg:0" submission="none"}
+4.14 Ax(Hx/\Gx) :
+|Ax(Hx/\Gx)
+~~~
+
+<br>
+
+*Example 15*. Use DeMorgan and propositional equivalences to find an equivalent of the following which contains no negations:
+
+$\neg \forall \; x \; (Gx \rightarrow \neg Hx)$
+
+~~~{.Translate .FOL system="gamutND" tests="maxNeg:0" submission="none"}
+4.15 Ex(Gx/\Hx) :
+|Ex(Gx/\Hx)
+~~~
+
+<br>
+
+<p style="page-break-before: always">
+
+## Prenex normal form
+
+<br>
+
+Prior to starting these problems, please review [prenex normal form](https://carnap.io/shared/walsh@g.ucla.edu/book-pred-more-validity.pandoc#prenex-normal-form).
+
+<br>
+
+*Example 16*. Find an equivalent of the following which is in prenex normal form:
+
+$\forall \; x \; \exists \; y \; Rxy \vee \exists \; z \; Fz$
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.16 AxEyEz(Rxy\/Fz) :
+|AxEyEz(Rxy\/Fz)
+~~~
+
+<br>
+
+*Example 17*. Find an equivalent of the following which is in prenex normal form:
+
+$\forall \; x \; \exists \; y \; \neg Rxy \wedge \forall \; z \; Fz$
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.17 AxEyAz(~Rxy/\Fz) :
+|AxEyAz(~Rxy/\Fz)
+~~~
+
+<br>
+
+*Example 18*. Find an equivalent of the following which is in prenex normal form:
+
+$\forall \; x \; \exists \; y \; Rxy \rightarrow \forall \; u \; \exists \; v \; Rvu$
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.18 ExAyAuEv(~Rxy\/Rvu) :
+|ExAyAuEv(~Rxy\/Rvu)
+~~~
+
+<br>
+
+*Example 19*. Find an equivalent of the following which is in prenex normal form:
+
+$\neg \forall \; x \; \exists \; y \; Rxy \rightarrow \neg \forall \; u \; \exists \; v \; Rvu$
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.19 AxEyEuAv(Rxy\/~Rvu) :
+|AxEyEuAv(Rxy\/~Rvu)
+~~~
+
+<br>
+
+*Example 20*. Find an equivalent of the following which is in prenex normal form:
+
+$(\neg \forall \; x \; \exists \; y \; Rxy \rightarrow \neg \forall \; u \; \exists \; v \; Rvu)\rightarrow EzFz$
+
+~~~{.Translate .FOL system="gamutND" tests="PNF" submission="none"}
+4.20 EzExAyAuEv((~Rxy/\Rvu)\/Fz) :
+|EzExAyAuEv((~Rxy/\Rvu)\/Fz)
+~~~
+
+
+These are practice problems written by Sean Walsh. They are run on [carnap.io](http://www.carnap.io).[^5]
+
+[^5]: which is:
+
+<br>

@@ -1,0 +1,186 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+<br>
+<br>
+
+# Classical predicate logic
+
+<br>
+
+- [More on combining proofs](#more-on-combining-proofs)
+- [Double-negation and Derivation of DeMorgan](#double-negation-and-derivation-of-demorgan)
+- [Frege and Aristotle on double-negation and law of excluded middle](#frege-and-aristotle-on-double-negation-and-law-of-excluded-middle)
+- [Combining proofs in classical logic](#combining-proofs-in-classical-logic)
+
+We introduce classical predicate logic, and talk a bit about its motivation. Before we do that, we review a bit one of the ideas from last time about combining proofs, since understanding how this works in classical predicate logic is illustrative.
+
+<br>
+
+## More on combining proofs
+
+First we begin with two simple proofs:
+
+*Example 1*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Fa/\Ga  :|-: Ex(Fx/\Gx)
+|Fa/\Ga :assumption
+```
+
+*Example 2*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Ex(Fx/\Gx)  :|-: ExFx
+|Ex(Fx/\Gx) :assumption
+```
+
+*Example 3*
+
+Then we prove this by combining the two previous proofs:
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Fa/\Ga  :|-: ExFx
+|Fa/\Ga :assumption
+```
+
+Note that when we have finished this proof in Example 3 we have an introduction of existential followed immediately by an elimination of existential. This inevitably happens when one pastes together different proofs.
+
+*Example 4*
+
+Here, in this example, we give the direct proof. One can see this arising simply by following the strategy of "apply elimination rules at top, and then introduction rules at bottom." It also arises from taking our proof in Example 3 and moving what is in the brackets upwards and changing the letter `b` to `a`.
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Fa/\Ga  :|-: ExFx
+|Fa/\Ga :assumption
+```
+
+<br>
+
+## Double-negation and Derivation of DeMorgan
+
+The deductive system we have been working with up to this point is called intuitionistic predicate logic. Now we extend the system further with another rule called double-negation that says that $\phi$ is equivalent to $\neg \neg \phi$. We add this to our deductive system using the abbreviation `DN`. We write the rule like follows:
+
+<video controls width="700" src="https://logic-teaching.github.io/pred/vid/DN.mp4"/> </video>
+
+<br>
+
+(Note that that the version on the left-hand side is in fact derivable from the other rules). The logic which results from adding double-negation to our system is called *classical predicate logic*.
+
+The law of double-negation can help us prove the remaining DeMorgan laws for the quantifiers:
+
+- *DeMorgan*: $\neg \forall \;x \; \phi(x)$ is equivalent to $\exists \; x \; \neg \phi(x)$.
+- *DeMorgan*: $\neg \exists \; x \; \phi(x)$ is equivalent to $\forall \; x \; \neg \phi(x)$.
+
+The second one was already covered in the Practice Problems from last week. We now handle the first one, and we split it into two parts:
+
+*Example 5*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ ~AxFx  :|-: Ex~Fx
+|~AxFx :assumption
+```
+
+Before we turn to the other half of this instance of DeMorgan, let us note that this proof illustrates that classical predicate logic does not have the subformula property. In particular `~~Ex~Fx` in the second-to-last line is not a subformula of either the premise `~AxFx` or the conclusion `Ex~Fx`.
+
+Here is the other half of this version of DeMorgan, which does not in fact double-negation:
+
+*Example 6*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Ex~Fx  :|-: ~AxFx
+|Ex~Fx :assumption
+```
+
+<br>
+
+Finally, for the sake of completeness, here is the simple proof that one direction of double-negation is provable even in intuitionistic logic:
+
+*Example 7*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Fa  :|-: ~~Fa
+|Fa :assumption
+```
+
+<br>
+
+## Frege and Aristotle on double-negation and law of excluded middle
+
+Against the background of the other rules of intuitionistic predicate logic, double-negation is equivalent to law of the excluded middle, which we designate as `LEM` in our proof system. This law says that one can write $\phi \vee \neg \phi$ on any line, and justify it merely as `LEM`. (The proof of the equivalence of double-negation and law of excluded middle is written up in the last section of the practice problems for this week).
+
+Why believe double-negation and law of the excluded middle? These rules do not seem to follow from the introduction rules or elimination rules for any symbol. Hence, Gentzen's specific proposal for how to think about the rules as offering definitions will not work. Maybe there is a more general sense of definition-- sometimes called "implicit definition"-- on which double-negation and law of the excluded middle are simply describing the contours of some notion we are already interested in.
+
+But that would push the question back to why we are interested in the notion as described by double-negation and law of the excluded middle. One easy answer is simply that they follow rather trivially from the truth-tables for negation (and disjunction), as well as the associated clauses in Tarski's definition of truth in a model. But then it would seem that the primary or fundamental object of study would be the truth-tables or models, and it is even hard to see why one would be interested in proofs *per se*.
+
+One answer to this kind of concern is voiced powerfully in the work of Frege, who was the first to develop first-order classical predicate logic, in his 1879 work *Begriffschrift*, whose title loosely translates as "Concept writing." Here is Frege's idea of the purpose of a proof-system:[^1]
+
+&nbsp; &nbsp; &nbsp;  <img src="https://logic-teaching.github.io/pred/texts/Frege%201967%20-%20Begriffsschrift%20-%20Preface%20quotation%20p.%206.png
+" alt="Frege on proofs" width="700"/>
+
+[^1]: p. 6 of: [Frege, Gottlob. 1967. "Begriffsschrift." In From Frege to Gödel: A Source Book in Mathematical Logic, 1879-1931, edited by Jean Van Heijenoort, 1–83. Harvard University Press.](https://logic-teaching.github.io/pred/texts/Frege%201967%20-%20Begriffsschrift.pdf). The original is: [Frege, Gottlob. 1879. Begriffsschrift, Eine Der Arithmetischen Nachgebildete Formelsprache Des Reinen Denkens. Halle: Nebert.](https://logic-teaching.github.io/pred/texts/Frege%201879%20-%20Begriffsschrift,%20eine%20der%20arithmetischen%20nachgebildete%20Formelsprache%20des%20reinen%20Denkens.pdf)
+
+He goes onto suggest that proof-theory is to reasoning what a microscope is to vision: it helps one zoom in and see details of the derivation which one might not have otherwise been able to see. Frege's general picture was that the proofs produced thereby probably are not evident or obvious: their value rather was that they are gapless, and one does not need to worry that other premises besides the ones cited having crept into one's proof. As to what makes a logical law a logical law, Frege has a rather quietest attitude towards this question: while we can say things like logical laws make demands on us and have maximally wide applicability, perhaps there is nothing informative that one can ultimately say to the reason why a formula is a logical law.[^2] His brief remarks on why basic laws like double-negation are true seems to go through proto-semantic notions like truth-tables and model-like notions. This is compatible with the idea that these are the more fundamental ways to think about why these basic laws are true, and that the proof-theory is valuable because it creates gapless derivations from these basic laws.
+
+[^2]: See pp. 12, 15 of: [Frege, Gottlob. 1964. "Introduction and Sections 1-33." In The Basic Laws of Arithmetic: Exposition of the System. University of California Press.](https://logic-teaching.github.io/pred/texts/Frege%201964%20-%20Introduction%20and%20sections%201-33.pdf).
+
+Aristotle is an interesting parallel. His discussion of law of the excluded middle takes place in his *Metaphysics* (Book IV, Chapter 7). He thinks of the law of the excluded middle as being expressive of their only being two truth-values. Hence, he takes someone who denies law of the excluded middle as being committed to at least three truth-values. He thinks that this will conflict with some of our ordinary ways of expressing disagreement. When you say that the house is red and I deny it, then we ordinarily take me to be saying that the house is some other color. But if there is genuinely a third intermediary truth-value, then my denying the house is red could just be me saying that "the house is red" has the intermediary truth-value. Other of Aristotle's arguments for the law of the excluded middle go through considerations of change: if change involves something switching from being $F$ to not $F$, then it is unclear what exactly "not $F$" means in the three-valued setting.[^3]
+
+Aristotle discusses law of the excluded middle in conjunction with the principle of non-contradiction. Recall that the latter says that $\neg (\phi\wedge \neg\phi)$. If one is thinking in terms of truth-tables, this is saying that no formula $\phi$ can be both true and false. Note that this principle is in fact derivable just in intuitionistic logic, and in fact just follows directly from the negation introduction and elimination rules. But, phrased semantically, there does seem to be a parallel between the principle of non-contradiction "nothing can have both truth-values" and the law of the excluded middle "everything has one of the two truth-values". But from the perspective of our deductive system, the principle of non-contradiction is derivable from the other rules, whereas the law of the excluded middle and double-negation need separate rules to cover them.
+
+[^3]: See Chapter 7 pp. 57-58 of [Aristotle. 2014. “Metaphysics, Book IV.” In Complete Works of Aristotle, Volume 2: The Revised Oxford Translation, 42–59. Princeton University Press.](https://logic-teaching.github.io/pred/texts/Aristotle%202014%20-%20Metaphysics,%20Book%20IV.pdf)
+
+For the sake of completeness, here is the proof that the principle of non-contradiction is derivable in intuitionistic logic:
+
+*Example 8*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+   :|-: ~(Fa/\~Fa)
+```
+
+<br>
+
+## Combining proofs in classical logic
+
+Let us close on noting something about combining proofs in predicate logic.
+
+First, consider the following simple proof:
+
+*Example 9*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Ga\/~Ex~Fx, Ex~Fx  :|-: Ga
+|Ga\/~Ex~Fx :assumption
+|Ex~Fx :assumption
+```
+
+Second, let's try to paste Example 9 and Example 5 together to prove the following:
+
+<br>
+
+*Example 10*
+
+```{.ProofChecker .GamutNDPlus submission="none"}
+ Ga\/~Ex~Fx, ~AxFx  :|-: Ga
+|Ga\/~Ex~Fx :assumption
+|~AxFx :assumption
+```
+
+When we combine these proofs, there is no place in the proof where there is an introduction rule followed immediately by an elimination rule. Hence, the opportunity for simplification which Gentzen drew our attention to is not available. We have seen through many examples that this process of simplification seems to collate with an intuition about the directness of the proof. Is there a more direct proof of the above result? Perhaps we could tuck the first bracket into the third bracket, but this does not have the kind of simplifying nature that we have seen in previous examples.
+
+
+These are lecture notes written by Sean Walsh. They are run on [carnap.io](http://www.carnap.io).[^5]
+
+[^5]: which is:
+

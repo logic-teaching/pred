@@ -1,0 +1,136 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+<br>
+<br>
+
+# Model checking
+
+We need a very small amount of set-theory notation for this course. The reason why is that we eventually want to define models and truth in a model: and we will represent models by sets.
+
+- [Model-checking](#model-checking)
+
+## Model-checking
+
+```{.CounterModeler .Simple system="gamutND"}
+1.1 AxFx, ExGx
+```
+
+```{.CounterModeler .Simple system="gamutND"}
+1.2 AxAyFxy, EyExGxy
+```
+
+```{.CounterModeler .Simple system="gamutND"}
+1.3 AxAyRxy, EyExRxy
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.4 AxRxx :|-: AxAyRxy
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.5 AxRxxx :|-: AxAyAzRxyz
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.6 Rcc :|-: AxRxx
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.7 AxRxx :|-: Rcc
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.8 AsRss :|-: Raa
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.9 EzRz :|-: Ra
+```
+
+```{.CounterModeler .Validity system="gamutND"}
+1.10 EzRz :|-: Rfa
+```
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.11 Ax((Cx/\Lx)->Rx) : Every cheerful  law student is relaxed.
+~~~
+
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.12 Ex((Fx/\Lx)/\Tx)->Ex((Fx/\Lx)/\Rx) : If some festive law student likes table-tennis, then some festive law student is relaxed.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.13 AxAy((Cxy/\Lxy)->Rxy) : Every cheerful  law student is relaxed.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.14 Ax((Cxfx/\Lxfx)->Rxfx) : Every cheerful  law student is relaxed.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.15 AxAyx=y : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.16 ExEy x=y : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.17 ExEy Pxy : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.18 ExEy P x y : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.19 ExEy P fx fy : Something.
+~~~
+
+```{.ProofChecker .GamutND init="now"}
+1.20 AxPx :|-: Pc
+```
+
+
+```{.ProofChecker .GamutND init="now"}
+1.21 AxAyPxy :|-: AxAyPyx
+```
+
+
+```{.ProofChecker .ForallxQL init="now"}
+1.22 AxAyPxy :|-: AxAyPyx
+```
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.23 AxPx : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.24 Pc : Something.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+1.25 Pv : Something.
+~~~
+
+
+<br>
+
+<br>
+
+These are lecture notes written by Sean Walsh. They are run on [carnap.io](http://www.carnap.io).[^3]
+
+[^3]: which is:
